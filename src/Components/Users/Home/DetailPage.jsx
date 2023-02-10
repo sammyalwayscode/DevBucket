@@ -14,7 +14,7 @@ const DetailPage = () => {
           </UserAvatar>
           <UserProjDetails>
             <ProjectName>Behance Saas Redesign | Darkmode</ProjectName>
-            <UserName>Tahsin Tamanna | follow</UserName>
+            <UserName>Olorunda Samuel | follow</UserName>
           </UserProjDetails>
         </TopBox>
 
