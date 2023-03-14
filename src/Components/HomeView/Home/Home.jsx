@@ -1,4 +1,5 @@
 import React from "react";
+import { NavLink } from "react-router-dom";
 import styled from "styled-components";
 import CardComp from "../CardComp/CardComp";
 
@@ -14,7 +15,9 @@ const Home = (props) => {
             and will help you with the sign-up process
           </TextContent>
           <ButtonCtrl>
-            <TextBtn>Start Now</TextBtn>
+            <NavLink to="signup">
+              <TextBtn>Start Now</TextBtn>
+            </NavLink>
             <TextBtn>Contact Sales</TextBtn>
           </ButtonCtrl>
         </TextDiv>
