@@ -10,6 +10,7 @@ const App = () => {
   return (
     <div>
       <ThemeProvider theme={themes[theme]}>
+        {/* <ThemeProvider theme={themes}> */}
         <HomeRoute />
         <UserRoute />
       </ThemeProvider>
