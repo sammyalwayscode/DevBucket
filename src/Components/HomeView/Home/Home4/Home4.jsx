@@ -168,7 +168,7 @@ const FeatSmall = styled.div`
 `;
 const SndTitle = styled.div`
   font-size: 30px;
-  font-weight: 600;
+  font-weight: 800;
   margin-bottom: 25px;
   line-height: 35px;
   color: #fff;

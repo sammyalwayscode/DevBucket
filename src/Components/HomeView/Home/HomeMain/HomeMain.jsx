@@ -12,9 +12,9 @@ import Home6 from "../Home6/Home6";
 const HomeMain = (props) => {
   return (
     <Container>
-      <Header theme={props.theme} setTheme={props.setTheme} />
-      <Home theme={props.theme} setTheme={props.setTheme} />
-      <Home2 theme={props.theme} setTheme={props.setTheme} />
+      <Header />
+      <Home />
+      <Home2 />
       <Home3 />
       <Home4 />
       <Home5 />

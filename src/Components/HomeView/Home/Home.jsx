@@ -105,6 +105,10 @@ const Wrapper = styled.div`
   @media screen and (max-width: 1100px) {
     justify-content: center;
   }
+
+  @media (max-width: 500px) {
+    width: 90%;
+  }
 `;
 const CardDiv = styled.div`
   max-width: 600px;
@@ -124,7 +128,12 @@ const TextDiv = styled.div`
   margin-left: 50px;
   /* background-color: royalblue; */
   @media screen and (max-width: 900px) {
-    margin-left: 20px;
+    /* margin-left: 20px; */
+    margin: 0;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
   }
 `;
 const WelcomeSml = styled.div`
@@ -146,7 +155,7 @@ const WelcomeSml = styled.div`
 `;
 const TextTitle = styled.div`
   font-size: 32px;
-  font-weight: 600;
+  font-weight: 800;
   margin-bottom: 37px;
   line-height: 35px;
   color: #fff;

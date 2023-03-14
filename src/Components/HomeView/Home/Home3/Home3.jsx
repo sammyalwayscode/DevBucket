@@ -161,7 +161,7 @@ const SmallText = styled.div`
 `;
 const TextTitle = styled.div`
   font-size: 30px;
-  font-weight: 600;
+  font-weight: 800;
   margin-bottom: 10px;
   line-height: 35px;
   color: #fff;

@@ -165,7 +165,7 @@ const FeatSmall = styled.div`
 `;
 const SndTitle = styled.div`
   font-size: 30px;
-  font-weight: 600;
+  font-weight: 800;
   margin-bottom: 25px;
   line-height: 35px;
   color: #fff;
@@ -185,13 +185,17 @@ const SatisticRec = styled.div`
   display: flex;
   justify-content: space-between;
 `;
-const SastNumDisHold = styled.div``;
+const SastNumDisHold = styled.div`
+  @media (max-width: 500px) {
+    margin: 0 10px;
+  }
+`;
 const SastNum = styled.div`
   font-size: 35px;
   font-weight: bold;
   color: #377dff;
   @media screen and (max-width: 500px) {
-    font-size: 29px;
+    font-size: 25px;
   }
 `;
 const SastDisc = styled.div`

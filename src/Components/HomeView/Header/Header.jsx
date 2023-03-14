@@ -60,10 +60,15 @@ const Container = styled.div`
   padding-bottom: 20px;
 `;
 const Wrapper = styled.div`
-  width: 1100px;
+  width: 85%;
   display: flex;
   justify-content: space-between;
   align-items: center;
+  /* background-color: red; */
+
+  @media (max-width: 500px) {
+    width: 90%;
+  }
 `;
 // const LogoDiv = styled.img`
 //   width: 50px;
@@ -72,7 +77,7 @@ const Wrapper = styled.div`
 
 const LogoHold = styled.div`
   font-weight: 900;
-  font-size: 20px;
+  font-size: 18px;
 `;
 
 const SignDiv = styled.div`
@@ -82,7 +87,8 @@ const SignDiv = styled.div`
 const SignBtn = styled.button`
   height: 34px;
   width: 120px;
-  margin: 12px;
+  /* margin: 12px; */
+  margin-left: 10px;
   background-color: #377dff;
   border: none;
   border-radius: 5px;
