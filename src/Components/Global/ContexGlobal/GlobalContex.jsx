@@ -1,6 +1,6 @@
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import { createContext } from "react";
-import storage from "local-storage-fallback";
+// import storage from "local-storage-fallback";
 
 export const GlobalProvider = createContext();
 
@@ -32,20 +32,21 @@ export const GlobalState = ({ children }) => {
     dark: DarkTheme,
   };
 
-  const storeThemeChoice = () => {
-    const saveTheme = storage.getItem("theme");
-    return saveTheme
-      ? JSON.parse(saveTheme)
-      : { themes: "light", myTheme: "light" };
-  };
+  // const storeThemeChoice = () => {
+  //   const saveTheme = storage.getItem("theme");
+  //   return saveTheme
+  //     ? JSON.parse(saveTheme)
+  //     : { themes: "light", myTheme: "light" };
+  // };
 
-  const [theme, setTheme] = useState(storeThemeChoice);
-  useEffect(() => {
-    storage.setItem("theme", JSON.stringify(theme));
-  }, [theme]);
+  const [theme, setTheme] = useState("dark");
+
+  // useEffect(() => {
+  //   storage.setItem("theme", JSON.stringify(theme));
+  // }, [theme]);
 
   return (
-    <GlobalProvider.Provider value={{ theme, themes, setTheme, DarkTheme }}>
+    <GlobalProvider.Provider value={{ theme, themes, setTheme }}>
       {children}
     </GlobalProvider.Provider>
   );
