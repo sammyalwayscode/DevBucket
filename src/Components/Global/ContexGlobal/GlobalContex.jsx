@@ -39,10 +39,10 @@ export const GlobalState = ({ children }) => {
       : { themes: "light", myTheme: "light" };
   };
 
-  const [theme, setTheme] = useState("dark");
-  // useEffect(() => {
-  //   storage.setItem("theme", JSON.stringify(theme));
-  // }, [theme]);
+  const [theme, setTheme] = useState(storeThemeChoice);
+  useEffect(() => {
+    storage.setItem("theme", JSON.stringify(theme));
+  }, [theme]);
 
   return (
     <GlobalProvider.Provider value={{ theme, themes, setTheme, DarkTheme }}>

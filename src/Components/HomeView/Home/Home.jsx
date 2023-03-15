@@ -22,12 +22,12 @@ const Home = (props) => {
           </ButtonCtrl>
         </TextDiv>
         <CardDiv>
-          <CardComp />
-          <CardComp theme={props.theme} setTheme={props.setTheme} />
-          <CardComp theme={props.theme} setTheme={props.setTheme} />
-          <CardComp theme={props.theme} setTheme={props.setTheme} />
-          <CardComp theme={props.theme} setTheme={props.setTheme} />
-          <CardComp theme={props.theme} setTheme={props.setTheme} />
+          <CardComp cardIcon="/image/Product-Icons.png" />
+          <CardComp cardIcon="/image/Product-Icons-7.png" />
+          <CardComp cardIcon="/image/Product-Icons-9.png" />
+          <CardComp cardIcon="/image/Product-Icons-19.png" />
+          <CardComp cardIcon="/image/Product-Icons-17.png" />
+          <CardComp cardIcon="/image/System-Icons-2.png" />
         </CardDiv>
       </Wrapper>
     </Container>

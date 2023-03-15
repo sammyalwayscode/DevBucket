@@ -6,7 +6,7 @@ const CardComp = (props) => {
     <Container>
       <Wrapper>
         <IconDiv>
-          <IconImg src="/image/Product-Icons.png" alt="" />
+          <IconImg src={props.cardIcon} alt="" />
         </IconDiv>
         <CardTitle>Accounts</CardTitle>
         <CardContent>
@@ -33,6 +33,7 @@ const Container = styled.div`
   font-family: Montserrat;
   transition: all 350ms;
   transform: scale(1);
+  cursor: pointer;
   :hover {
     transform: scale(1.06);
   }
@@ -61,7 +62,7 @@ const IconDiv = styled.div`
   margin-bottom: 20px;
 `;
 const IconImg = styled.img`
-  width: 40px;
+  width: 20px;
   object-fit: cover;
 `;
 const CardTitle = styled.div`

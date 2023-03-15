@@ -1,43 +1,48 @@
 import React from "react";
 import styled from "styled-components";
-import iconOne from "./resp.png";
 
 const faqData = [
   {
-    faqIconType: `${iconOne}`,
+    faqIconType: `${"/image/resp.png"}`,
     faqTitle: "Cross Platform",
     faqContent:
       "Are you most often visited from mobile devices? No problem! Our template is fully responsive.",
+    id: 1,
   },
   {
-    faqIconType: `${iconOne}`,
+    faqIconType: `${"/image/paint_bucket.png"}`,
     faqTitle: "Cross Platform",
     faqContent:
       "Are you most often visited from mobile devices? No problem! Our template is fully responsive.",
+    id: 2,
   },
   {
-    faqIconType: `${iconOne}`,
+    faqIconType: `${"/image/document.png"}`,
     faqTitle: "Cross Platform",
     faqContent:
       "Are you most often visited from mobile devices? No problem! Our template is fully responsive.",
+    id: 3,
   },
   {
-    faqIconType: `${iconOne}`,
+    faqIconType: `${"/image/Product-Icons-19.png"}`,
     faqTitle: "Cross Platform",
     faqContent:
       "Are you most often visited from mobile devices? No problem! Our template is fully responsive.",
+    id: 4,
   },
   {
-    faqIconType: `${iconOne}`,
+    faqIconType: `${"/image/System-Icons.png"}`,
     faqTitle: "Cross Platform",
     faqContent:
       "Are you most often visited from mobile devices? No problem! Our template is fully responsive.",
+    id: 5,
   },
   {
-    faqIconType: `${iconOne}`,
+    faqIconType: `${"/image/🔍-Product-Icons-3.png"}`,
     faqTitle: "Cross Platform",
     faqContent:
       "Are you most often visited from mobile devices? No problem! Our template is fully responsive.",
+    id: 6,
   },
 ];
 
@@ -49,7 +54,7 @@ const Home6 = () => {
           <FaqSmal>FAQ</FaqSmal>
           <QurstBig>What you should know</QurstBig>
           <SubFaq>
-            Check out the key features of our template. They can help you create
+            Check out the key features of our template.hey can help you create
             your first-class project.
           </SubFaq>
         </Lap1>
