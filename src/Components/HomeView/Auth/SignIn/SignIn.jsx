@@ -1,11 +1,68 @@
-import React from "react";
+import React, { useState } from "react";
 import styled from "styled-components";
 import { FiArrowLeftCircle } from "react-icons/fi";
-import { NavLink } from "react-router-dom";
+import { NavLink, useNavigate } from "react-router-dom";
+import { useDispatch } from "react-redux";
+import { yupResolver } from "@hookform/resolvers/yup";
+import * as yup from "yup";
+import { useForm } from "react-hook-form";
+import axios from "axios";
+import swal from "sweetalert";
+import LoadingState from "../../../Global/loadingState/loading";
+import { loginUser } from "../../../Global/reduxGLobal/globalState";
 
 const SignIn = () => {
+  const dispatch = useDispatch();
+  const navigate = useNavigate();
+
+  const [loading, setLoading] = useState();
+
+  const formSchema = yup.object().shape({
+    email: yup.string().email().required("Enter Your Email"),
+    password: yup.string().required("ENter Your Pasword"),
+  });
+
+  const {
+    register,
+    handleSubmit,
+    // formState: { errors },
+  } = useForm({ resolver: yupResolver(formSchema) });
+
+  const onSummit = handleSubmit(async (value) => {
+    console.log(value);
+    const { email, password } = value;
+    const mainURI = "https://devbucket.onrender.com";
+    const URI = `${mainURI}/api/signInUser`;
+    setLoading(true);
+
+    await axios
+      .post(URI, { email, password })
+      .then((res) => {
+        dispatch(loginUser(res.data.data));
+        console.log(res.data.data);
+        swal({
+          title: `Signed In Sucessfully ✌️`,
+          text: "You Can Now Start Creating Awesome Diaries",
+          icon: "success",
+          button: "Proceed",
+        }).then(() => {
+          navigate("");
+        });
+        setLoading(false);
+      })
+      .catch((error) => {
+        swal({
+          title: error.response.data.message,
+          text: "An Error Occoured, Do Check your network Connection",
+          icon: "error",
+        });
+        setLoading(false);
+      });
+  });
+
   return (
     <Container>
+      {loading ? <LoadingState /> : null}
       <Wrapper>
         <InputPart>
           <IconTop to="/">
@@ -14,20 +71,28 @@ const SignIn = () => {
           <SignInputHold>
             <SignTitle>Sign In</SignTitle>
             <SignSubTitle>To Intract with your account</SignSubTitle>
-            <InputForm>
-              <InputDiv placeholder="Email " />
-              <InputDiv placeholder="Password" />
-              <InputButton>Sign Up</InputButton>
+            <InputForm onSubmit={onSummit}>
+              <InputDiv
+                placeholder="Email"
+                {...register("email")}
+                type="email"
+              />
+              <InputDiv
+                placeholder="Password"
+                {...register("password")}
+                type="password"
+              />
+              <InputButton type="submit">Sign In</InputButton>
             </InputForm>
             <HasAcc>
-              Don't have an account?{" "}
+              Don't have an account?{""}
               <NavLink
                 to="/signup"
                 style={{
                   textDecoration: "none",
                 }}
               >
-                <span>Sign Up</span>
+                <span>Sign In</span>
               </NavLink>
             </HasAcc>
           </SignInputHold>
@@ -109,14 +174,14 @@ const InputDiv = styled.input`
   border: none;
   outline: none;
   border-radius: 5px;
+  padding-left: 10px;
+  font-family: Montserrat;
+  font-weight: 700;
+  font-size: 13px;
 
   background-color: #e8effc;
   ::placeholder {
-    font-family: Montserrat;
-    font-weight: 700;
-    font-size: 13px;
     color: #377dff;
-    padding-left: 20px;
   }
 `;
 const InputButton = styled.button`

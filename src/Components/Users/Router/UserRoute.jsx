@@ -4,6 +4,7 @@ import Home from "../Home/Home";
 import Header from "../Header/Header";
 import DetailPage from "../Home/DetailPage";
 import Share from "../Home/Share";
+import Favourite from "../Home/Favourite";
 
 const UserRoute = () => {
   return (
@@ -13,6 +14,7 @@ const UserRoute = () => {
         <Route path="/home" element={<Home />} />
         <Route path="/detail/:id" element={<DetailPage />} />
         <Route path="/project/share" element={<Share />} />
+        <Route path="/favourite" element={<Favourite />} />
       </Routes>
     </>
   );

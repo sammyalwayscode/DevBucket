@@ -16,7 +16,9 @@ const SideBar = ({ setToggle, toggle, toggleSwitch }) => {
 
           <Navigations>
             <Navs>For You</Navs>
+            <hr />
             <Navs>Favourite</Navs>
+            <hr />
           </Navigations>
           <AvatarName>
             <Avatar>
@@ -24,6 +26,7 @@ const SideBar = ({ setToggle, toggle, toggleSwitch }) => {
             </Avatar>
             <Name>Olorunda</Name>
           </AvatarName>
+          <hr />
         </WrapperHold>
       </Wrapper>
     </Container>
@@ -49,6 +52,11 @@ const Wrapper = styled.div`
 
 const WrapperHold = styled.div`
   width: 85%;
+  hr {
+    border: none;
+    height: 1px;
+    background-color: lightgray;
+  }
 `;
 
 const CancleShare = styled.div`
@@ -64,14 +72,14 @@ const CancleBtn = styled.div`
 `;
 const Button = styled.button`
   height: 35px;
-  width: 130px;
+  width: 150px;
   /* background-color: #377dff; */
   background-color: transparent;
   border: 1px solid lightgray;
   font-family: Montserrat;
   /* border: none; */
   color: #000;
-  font-size: 12px;
+  font-size: 11px;
   font-weight: 700;
   border-radius: 30px;
   cursor: pointer;
@@ -82,7 +90,7 @@ const Button = styled.button`
 `;
 const Navigations = styled.div``;
 const Navs = styled.div`
-  font-size: 14px;
+  font-size: 12px;
   font-weight: 700;
   margin: 15px 0;
   cursor: pointer;
@@ -93,8 +101,8 @@ const AvatarName = styled.div`
 `;
 
 const Avatar = styled.div`
-  height: 35px;
-  width: 35px;
+  height: 30px;
+  width: 30px;
   border-radius: 50%;
   border: 1px solid black;
   background-color: gray;
@@ -110,4 +118,5 @@ const Avatar = styled.div`
 const Name = styled.div`
   margin-left: 10px;
   font-weight: 600;
+  font-size: 12px;
 `;

@@ -6,6 +6,7 @@ import { useState } from "react";
 import SideBar from "./SideBar";
 import { GiCancel } from "react-icons/gi";
 import CategoriesStat from "./CategoriesStat";
+import { NavLink } from "react-router-dom";
 
 const Header = () => {
   const [toogle, setToggle] = useState(false);
@@ -21,11 +22,12 @@ const Header = () => {
           <LogoNavs>
             <LogoHold>DevBucket</LogoHold>
             <Navagations>
-              <Navs>
+              <Navs to="/home">
                 <span>For You</span>
                 <hr />
               </Navs>
-              <Navs>
+
+              <Navs to="/favourite">
                 <span>Favorite</span>
                 <hr />
               </Navs>
@@ -36,7 +38,9 @@ const Header = () => {
               <BiSearchAlt />
               <input type="search" placeholder="Make a Search..." />
             </SearcHold>
-            <Button>Share Your Work</Button>
+            <Navs to="/project/share">
+              <Button>Share Your Work</Button>
+            </Navs>
             <Avatar>
               <img src="/image/ava.png" alt="" />
             </Avatar>
@@ -77,6 +81,8 @@ const Container = styled.div`
   justify-content: center;
   align-items: center;
   border-bottom: 1px solid lightgray;
+  background-color: ${(props) => props.theme.pageBackground};
+  color: ${(props) => props.theme.textColor};
 `;
 const Wrapper = styled.div`
   width: 85%;
@@ -102,14 +108,16 @@ const Navagations = styled.div`
     display: none;
   }
 `;
-const Navs = styled.div`
+const Navs = styled(NavLink)`
   margin: 0 10px;
   font-weight: 600;
   cursor: pointer;
   font-size: 15px;
   /* background-color: beige; */
+  color: #000;
   display: flex;
   flex-direction: column;
+  text-decoration: none;
 
   span {
     /* background-color: red; */
@@ -121,7 +129,8 @@ const Navs = styled.div`
     width: 100%;
     /* bottom: 0; */
     top: 6px;
-    border: 1px solid black;
+    /* border: ${(props) => props.theme.userHeaderActiveNav}; */
+    border: 1px solid #377dff;
   }
 `;
 const SearchProfile = styled.div`

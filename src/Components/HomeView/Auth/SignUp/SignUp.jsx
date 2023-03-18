@@ -1,11 +1,65 @@
-import React from "react";
+import React, { useState } from "react";
 import styled from "styled-components";
 import { FiArrowLeftCircle } from "react-icons/fi";
-import { NavLink } from "react-router-dom";
+import { NavLink, useNavigate } from "react-router-dom";
+import * as yup from "yup";
+import { useForm } from "react-hook-form";
+import { yupResolver } from "@hookform/resolvers/yup";
+import axios from "axios";
+import swal from "sweetalert";
+import LoadingState from "../../../Global/loadingState/loading";
 
 const SignUp = () => {
+  const navigate = useNavigate();
+  const [loading, setLoading] = useState(false);
+  const formSchema = yup.object().shape({
+    name: yup.string().required("Your Name Is Required"),
+    email: yup.string().email().required("Please Enter A Valid Email"),
+    password: yup.string().required("Your Password Is Required"),
+  });
+
+  const {
+    register,
+    handleSubmit,
+    // formState: { errors },
+  } = useForm({
+    resolver: yupResolver(formSchema),
+  });
+
+  const onSummit = handleSubmit(async (value) => {
+    console.log(value);
+    const { name, email, password } = value;
+    const mainURI = "https://devbucket.onrender.com";
+    const URI = `${mainURI}/api/signUpUser`;
+    setLoading(true);
+
+    await axios
+      .post(URI, { name, email, password })
+      .then((res) => {
+        console.log("Logged In", res);
+        swal({
+          title: `Welcome ${name}`,
+          text: "You just Signed Up Please proceed to Sign In",
+          icon: "success",
+          button: "Sign In Now",
+        }).then(() => {
+          navigate("/signin");
+        });
+        setLoading(false);
+      })
+      .catch((error) => {
+        swal({
+          title: error.response.data.message,
+          text: "Oops 🤕🤕🤕 An Error Occoured",
+          icon: "error",
+        });
+        setLoading(false);
+      });
+  });
+
   return (
     <Container>
+      {loading ? <LoadingState /> : null}
       <Wrapper>
         <InputPart>
           <IconTop to="/">
@@ -14,11 +68,23 @@ const SignUp = () => {
           <SignInputHold>
             <SignTitle>Sign Up</SignTitle>
             <SignSubTitle>To Intract with your account</SignSubTitle>
-            <InputForm>
-              <InputDiv placeholder="Your Name" />
-              <InputDiv placeholder="Email " />
-              <InputDiv placeholder="Password" />
-              <InputButton>Sign Up</InputButton>
+            <InputForm onSubmit={onSummit}>
+              <InputDiv
+                placeholder="Your Name"
+                {...register("name")}
+                type="text"
+              />
+              <InputDiv
+                placeholder="Email "
+                {...register("email")}
+                type="email"
+              />
+              <InputDiv
+                placeholder="Password"
+                {...register("password")}
+                type="password"
+              />
+              <InputButton type="submit">Sign Up</InputButton>
             </InputForm>
             <HasAcc>
               Already has an account?{" "}
@@ -107,14 +173,14 @@ const InputDiv = styled.input`
   border: none;
   outline: none;
   border-radius: 5px;
+  padding-left: 10px;
+  font-family: Montserrat;
+  font-weight: 700;
+  font-size: 13px;
 
   background-color: #e8effc;
   ::placeholder {
-    font-family: Montserrat;
-    font-weight: 700;
-    font-size: 13px;
     color: #377dff;
-    padding-left: 20px;
   }
 `;
 const InputButton = styled.button`
@@ -127,6 +193,12 @@ const InputButton = styled.button`
   background-color: #377dff;
   border-radius: 3px;
   margin-top: 10px;
+  cursor: pointer;
+  transition: all 350ms;
+
+  :hover {
+    transform: scale(0.98);
+  }
 `;
 const HasAcc = styled.div`
   font-size: 12px;

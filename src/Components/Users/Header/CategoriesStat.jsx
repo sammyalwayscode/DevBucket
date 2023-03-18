@@ -25,6 +25,8 @@ const Container = styled.div`
   border-bottom: 1px solid lightgray;
   display: flex;
   justify-content: center;
+  background-color: ${(props) => props.theme.pageBackground};
+  color: ${(props) => props.theme.textColor};
 `;
 const Wrapper = styled.div`
   width: 85%;
@@ -45,7 +47,7 @@ const CateCards = styled.button`
   border-radius: 3px;
   cursor: pointer;
   transition: all 350ms;
-
+  color: ${(props) => props.theme.textColor};
   :hover {
     transform: scale(0.97);
   }

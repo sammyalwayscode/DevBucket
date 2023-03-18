@@ -161,7 +161,7 @@ const Container = styled.div`
   display: flex;
   justify-content: center;
   align-items: center;
-  background-color: #f9f9f9;
+  background-color: ${(props) => props.theme.userDetailPageBackgroundColor};
 `;
 const Wrapper = styled.div`
   width: 85%;
@@ -198,6 +198,8 @@ const ImageBox = styled.div`
 const DescriptionBox = styled.div`
   padding: 40px 0;
   background-color: #ffffff;
+  /* background-color: ${(props) =>
+    props.theme.userDetailPageBackgroundColorCard}; */
   /* background-color: aqua; */
   display: flex;
   flex-direction: column;

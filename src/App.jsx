@@ -8,13 +8,10 @@ import { GlobalProvider } from "./Components/Global/ContexGlobal/GlobalContex";
 const App = () => {
   const { themes, theme } = useContext(GlobalProvider);
   return (
-    <div>
-      <ThemeProvider theme={themes[theme]}>
-        {/* <ThemeProvider theme={themes}> */}
-        <HomeRoute />
-        <UserRoute />
-      </ThemeProvider>
-    </div>
+    <ThemeProvider theme={themes[theme]}>
+      <HomeRoute />
+      <UserRoute />
+    </ThemeProvider>
   );
 };
 

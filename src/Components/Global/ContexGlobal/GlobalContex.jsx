@@ -13,6 +13,9 @@ export const GlobalState = ({ children }) => {
     footerBgColor: "#f6f9ff",
     footerTextTitleColor: "#273B60",
     footerTextNavColor: "#273B60",
+    userHeaderActiveNav: "1px solid #1c1c1c",
+    userDetailPageBackgroundColor: "#f9f9f9",
+    userDetailPageBackgroundColorCard: "#fff",
   };
 
   const DarkTheme = {
@@ -25,6 +28,9 @@ export const GlobalState = ({ children }) => {
     footerBgColor: "linear-gradient(to bottom, #212429, #1A1C20  )",
     footerTextTitleColor: "#fafafa",
     footerTextNavColor: "#D1E0FB",
+    userHeaderActiveNav: "1px solid #377dff",
+    userDetailPageBackgroundColor: "#212429",
+    userDetailPageBackgroundColorCard: "#2A2D31",
   };
 
   const themes = {
@@ -39,7 +45,7 @@ export const GlobalState = ({ children }) => {
   //     : { themes: "light", myTheme: "light" };
   // };
 
-  const [theme, setTheme] = useState("dark");
+  const [theme, setTheme] = useState("light");
 
   // useEffect(() => {
   //   storage.setItem("theme", JSON.stringify(theme));

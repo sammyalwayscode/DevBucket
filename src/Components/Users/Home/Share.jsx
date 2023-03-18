@@ -7,7 +7,7 @@ const Share = () => {
       <Wrapper>
         <UploadsHold>
           <UploadImageDiv>
-            <img src="" alt="" />
+            <img src="/image/imagee.png" alt="" />
           </UploadImageDiv>
           <OtherInputDiv>
             <Title>Share One Of your Best Work</Title>
@@ -69,6 +69,7 @@ const Wrapper = styled.div`
   display: flex;
   justify-content: center;
   align-items: center;
+
   flex-wrap: wrap;
 
   @media (max-width: 800px) {
@@ -95,6 +96,18 @@ const UploadImageDiv = styled.div`
   height: 100%;
   background-color: #f8f8ff;
   border: 1px solid lightgray;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  cursor: pointer;
+
+  img {
+    width: 100px;
+  }
+
+  @media (max-width: 800px) {
+    display: none;
+  }
 `;
 const OtherInputDiv = styled.div`
   width: 520px;
@@ -103,6 +116,11 @@ const OtherInputDiv = styled.div`
   overflow: scroll;
   flex-direction: column;
   align-items: center;
+
+  @media (max-width: 800px) {
+    width: 100%;
+    overflow: auto;
+  }
 `;
 
 const ImageBtn = styled.button`
@@ -116,6 +134,9 @@ const ImageBtn = styled.button`
   font-weight: 600;
   cursor: pointer;
   margin: 0 10px;
+  @media (max-width: 400px) {
+    width: 300px;
+  }
 
   :hover {
     /* background-color: #f1f1f1; */
@@ -135,6 +156,10 @@ const InputDiv = styled.div`
     font-family: Montserrat;
     font-weight: 600;
     padding-left: 8px;
+
+    @media (max-width: 400px) {
+      width: 300px;
+    }
   }
 
   span {
@@ -150,6 +175,10 @@ const InputDiv = styled.div`
     border: 1px solid lightgray;
     outline: none;
     font-family: Montserrat;
+
+    @media (max-width: 400px) {
+      width: 300px;
+    }
   }
 `;
 
@@ -167,6 +196,10 @@ const Button = styled.button`
   font-weight: 600;
   cursor: pointer;
   margin: 0 10px;
+
+  @media (max-width: 400px) {
+    width: 130px;
+  }
   :hover {
     background-color: #f1f1f1;
     transform: scale(0.97);

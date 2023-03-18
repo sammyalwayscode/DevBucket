@@ -123,14 +123,16 @@ export default Home;
 
 const Container = styled.div`
   width: 100%;
+  height: 100%;
+  min-height: 100vh;
   display: flex;
   justify-content: center;
-  align-items: center;
-  background-color: ba;
+  color: ${(props) => props.theme.textColor};
+  background-color: ${(props) => props.theme.pageBackground};
 `;
 const Wrapper = styled.div`
   width: 95%;
-  color: #000;
+  /* color: #000; */
   display: flex;
   flex-wrap: wrap;
   justify-content: center;
@@ -141,6 +143,10 @@ const DisplayCards = styled.div`
   width: 300px;
   /* background-color: aliceblue; */
   margin: 10px;
+  @media (max-width: 500px) {
+    width: 100%;
+    margin: 10px 0;
+  }
 `;
 const ImageDiv = styled.div`
   height: 220px;
