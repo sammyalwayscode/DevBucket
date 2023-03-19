@@ -5,7 +5,7 @@ const initialState = {
 };
 
 const globalState = createSlice({
-  name: "global",
+  name: "globalState",
   initialState,
   reducers: {
     loginUser: (state, { payload }) => {
