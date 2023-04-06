@@ -42,7 +42,7 @@ const SignIn = () => {
         console.log(res.data.data);
         swal({
           title: `Signed In Sucessfully ✌️`,
-          text: "You Can Now Start Creating Awesome Diaries",
+          text: "You Can Now Start Creating Awesome Projects",
           icon: "success",
           button: "Proceed",
         }).then(() => {
