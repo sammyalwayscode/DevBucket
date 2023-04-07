@@ -10,6 +10,7 @@ const App = () => {
   return (
     <ThemeProvider theme={themes[theme]}>
       <HomeRoute />
+
       <UserRoute />
     </ThemeProvider>
   );
