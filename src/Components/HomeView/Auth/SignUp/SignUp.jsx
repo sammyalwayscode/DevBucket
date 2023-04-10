@@ -6,8 +6,9 @@ import * as yup from "yup";
 import { useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
 import axios from "axios";
-import swal from "sweetalert";
+import Swal from "sweetalert2";
 import LoadingState from "../../../Global/loadingState/loading";
+import toast from "react-hot-toast";
 
 const SignUp = () => {
   const navigate = useNavigate();
@@ -29,31 +30,35 @@ const SignUp = () => {
   const onSummit = handleSubmit(async (value) => {
     console.log(value);
     const { name, email, password } = value;
-    const mainURI = "https://devbucket.onrender.com";
-    const URI = `${mainURI}/api/signUpUser`;
+    const notify = () => toast("Here is your toast.");
+    // const mainURI = "https://devbucket.onrender.com";
+    const localURI = "http://localhost:2001";
+    const URI = `${localURI}/api/signUpUser`;
     setLoading(true);
 
     await axios
       .post(URI, { name, email, password })
       .then((res) => {
         console.log("Logged In", res);
-        swal({
-          title: `Welcome ${name}`,
-          text: "You just Signed Up Please proceed to Sign In",
+        Swal.fire({
+          // position: "top-end",
           icon: "success",
-          button: "Sign In Now",
-        }).then(() => {
-          navigate("/signin");
-        });
+          title: "Your work has been saved",
+          showConfirmButton: false,
+          timer: 1500,
+        }).then(navigate("/signin"));
         setLoading(false);
       })
       .catch((error) => {
-        swal({
-          title: error.response.data.message,
-          text: "Oops 🤕🤕🤕 An Error Occoured",
+        Swal.fire({
+          // position: "top-end",
           icon: "error",
+          title: error.response.data.message,
+          showConfirmButton: false,
+          timer: 1500,
         });
         setLoading(false);
+        console.log("Err", error);
       });
   });
 

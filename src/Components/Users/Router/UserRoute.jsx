@@ -12,9 +12,10 @@ import OnboardingFour from "../Onboarding/OnboardingFour";
 import PrivateRoute from "../../Global/PrivateRoute/PrivateRoute";
 
 const UserRoute = () => {
+  let auth = { token: false };
   return (
     <>
-      <Header />
+      {auth.token ? <Header /> : null}
       <Routes>
         <Route element={<PrivateRoute />}>
           <Route path="/home" element={<Home />} />

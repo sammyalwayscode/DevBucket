@@ -32,7 +32,8 @@ const SignIn = () => {
     console.log(value);
     const { email, password } = value;
     const mainURI = "https://devbucket.onrender.com";
-    const URI = `${mainURI}/api/signInUser`;
+    const localURI = "http://localhost:2001";
+    const URI = `${localURI}/api/signInUser`;
     setLoading(true);
 
     await axios
