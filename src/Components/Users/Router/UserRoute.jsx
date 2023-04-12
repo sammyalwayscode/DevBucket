@@ -10,12 +10,14 @@ import OnbordingTwo from "../Onboarding/OnbordingTwo";
 import OnboardingThree from "../Onboarding/OnboardingThree";
 import OnboardingFour from "../Onboarding/OnboardingFour";
 import PrivateRoute from "../../Global/PrivateRoute/PrivateRoute";
+import { useSelector } from "react-redux";
 
 const UserRoute = () => {
   let auth = { token: false };
+  const activeUser = useSelector((state) => state.myReducer.currentUser);
   return (
     <>
-      {auth.token ? <Header /> : null}
+      {activeUser.email ? <Header /> : null}
       <Routes>
         <Route element={<PrivateRoute />}>
           <Route path="/home" element={<Home />} />

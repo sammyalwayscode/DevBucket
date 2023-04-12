@@ -1,119 +1,64 @@
-import React from "react";
+import axios from "axios";
+import React, { useEffect, useState } from "react";
 import { AiFillHeart } from "react-icons/ai";
 import { FaComment } from "react-icons/fa";
 import styled from "styled-components";
 const Home = () => {
+  const [getProjects, setGetProjects] = useState([]);
+
+  const getProjectsData = async () => {
+    try {
+      // const mainURI = "https://devbucket.onrender.com";
+      const localURI = "http://localhost:2001";
+      const URI = `${localURI}/api/allProjects`;
+
+      await axios.get(URI).then((res) => {
+        console.log(res.data.data);
+        setGetProjects(res.data.data);
+      });
+    } catch (error) {
+      console.log(error.message);
+    }
+  };
+
+  useEffect(() => {
+    getProjectsData();
+  }, []);
+
   return (
     <Container>
       <Wrapper>
-        <DisplayCards>
-          <ImageDiv>
-            <img src="/image/grr.jpg" alt="" />
-          </ImageDiv>
-          <NameLikeDiv>
-            <Top>
-              <ProgUser>
-                <img src="/image/ava.png" alt="" />
-              </ProgUser>
-              <ProgTitle>The Git Guildians...</ProgTitle>
-            </Top>
-            <LikeComment>
-              <LikeHold>
-                <Icon>
-                  <AiFillHeart size="17" />
-                </Icon>
-                <LikeNum>20</LikeNum>
-              </LikeHold>
-              <CommentHold>
-                <Icon>
-                  <FaComment size="15" />
-                </Icon>
-                <CommentNum>34</CommentNum>
-              </CommentHold>
-            </LikeComment>
-          </NameLikeDiv>
-        </DisplayCards>
-        <DisplayCards>
-          <ImageDiv>
-            <img src="/image/grr.jpg" alt="" />
-          </ImageDiv>
-          <NameLikeDiv>
-            <Top>
-              <ProgUser>
-                <img src="/image/ava.png" alt="" />
-              </ProgUser>
-              <ProgTitle>The Git Guildians...</ProgTitle>
-            </Top>
-            <LikeComment>
-              <LikeHold>
-                <Icon>
-                  <AiFillHeart size="17" />
-                </Icon>
-                <LikeNum>20</LikeNum>
-              </LikeHold>
-              <CommentHold>
-                <Icon>
-                  <FaComment size="15" />
-                </Icon>
-                <CommentNum>34</CommentNum>
-              </CommentHold>
-            </LikeComment>
-          </NameLikeDiv>
-        </DisplayCards>
-        <DisplayCards>
-          <ImageDiv>
-            <img src="/image/grr.jpg" alt="" />
-          </ImageDiv>
-          <NameLikeDiv>
-            <Top>
-              <ProgUser>
-                <img src="/image/ava.png" alt="" />
-              </ProgUser>
-              <ProgTitle>The Git Guildians...</ProgTitle>
-            </Top>
-            <LikeComment>
-              <LikeHold>
-                <Icon>
-                  <AiFillHeart size="17" />
-                </Icon>
-                <LikeNum>20</LikeNum>
-              </LikeHold>
-              <CommentHold>
-                <Icon>
-                  <FaComment size="15" />
-                </Icon>
-                <CommentNum>34</CommentNum>
-              </CommentHold>
-            </LikeComment>
-          </NameLikeDiv>
-        </DisplayCards>
-        <DisplayCards>
-          <ImageDiv>
-            <img src="/image/grr.jpg" alt="" />
-          </ImageDiv>
-          <NameLikeDiv>
-            <Top>
-              <ProgUser>
-                <img src="/image/ava.png" alt="" />
-              </ProgUser>
-              <ProgTitle>The Git Guildians...</ProgTitle>
-            </Top>
-            <LikeComment>
-              <LikeHold>
-                <Icon>
-                  <AiFillHeart size="17" />
-                </Icon>
-                <LikeNum>20</LikeNum>
-              </LikeHold>
-              <CommentHold>
-                <Icon>
-                  <FaComment size="15" />
-                </Icon>
-                <CommentNum>34</CommentNum>
-              </CommentHold>
-            </LikeComment>
-          </NameLikeDiv>
-        </DisplayCards>
+        {getProjects?.map((props) => {
+          return (
+            <DisplayCards key={props._id}>
+              <ImageDiv>
+                <img src={props.projectImage} alt="" />
+              </ImageDiv>
+              <NameLikeDiv>
+                <Top>
+                  <ProgUser>
+                    <img src="/image/ava.png" alt="" />
+                  </ProgUser>
+                  <ProgTitle> {props.projectTitle} </ProgTitle>
+                </Top>
+                <LikeComment>
+                  <LikeHold>
+                    <Icon>
+                      <AiFillHeart size="17" />
+                    </Icon>
+                    <LikeNum> {props.likes.length} </LikeNum>
+                  </LikeHold>
+                  <CommentHold>
+                    <Icon>
+                      <FaComment size="15" />
+                    </Icon>
+                    <CommentNum>{props.comments.length}</CommentNum>
+                  </CommentHold>
+                </LikeComment>
+              </NameLikeDiv>
+            </DisplayCards>
+          );
+        })}
       </Wrapper>
     </Container>
   );

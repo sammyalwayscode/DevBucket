@@ -135,7 +135,7 @@ const Button = styled.button`
 const Circle = styled.div`
   height: 10px;
   width: 10px;
-  background-color: #fff;
+  background-color: lightgray;
   border-radius: 50%;
   cursor: not-allowed;
 `;
