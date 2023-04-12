@@ -47,7 +47,7 @@ const SignIn = () => {
           icon: "success",
           button: "Proceed",
         }).then(() => {
-          navigate("");
+          navigate("/onboardingone");
         });
         setLoading(false);
       })

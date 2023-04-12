@@ -1,4 +1,5 @@
 import React from "react";
+import { NavLink } from "react-router-dom";
 import styled from "styled-components";
 
 const OnboardingFour = () => {
@@ -19,7 +20,9 @@ const OnboardingFour = () => {
               tempor magna at tortor aliquet finibus. Sed eu nunc sit amet elit
               euismod faucibus.
             </p>
-            <Button>Get Started</Button>
+            <NavLink to="/home">
+              <Button>Get Started</Button>
+            </NavLink>
           </TextDiv>
           <ImageDiv>
             <img src="/image/3dfour.png" alt="" />
@@ -130,7 +133,7 @@ const Button = styled.button`
 const Circle = styled.div`
   height: 10px;
   width: 10px;
-  background-color: #fff;
+  background-color: lightgray;
   border-radius: 50%;
   cursor: not-allowed;
 `;
