@@ -3,6 +3,8 @@ import React, { useEffect, useState } from "react";
 import { AiFillHeart } from "react-icons/ai";
 import { FaComment } from "react-icons/fa";
 import styled from "styled-components";
+import { NavLink } from "react-router-dom";
+
 const Home = () => {
   const [getProjects, setGetProjects] = useState([]);
 
@@ -31,9 +33,11 @@ const Home = () => {
         {getProjects?.map((props) => {
           return (
             <DisplayCards key={props._id}>
-              <ImageDiv>
-                <img src={props.projectImage} alt="" />
-              </ImageDiv>
+              <NavLink to={`/detail/${props._id}`}>
+                <ImageDiv>
+                  <img src={props.projectImage} alt="" />
+                </ImageDiv>
+              </NavLink>
               <NameLikeDiv>
                 <Top>
                   <ProgUser>
@@ -97,10 +101,15 @@ const ImageDiv = styled.div`
   height: 220px;
   width: 100%;
   margin-bottom: 10px;
+  overflow: hidden;
   img {
     height: 100%;
     width: 100%;
     object-fit: cover;
+    transition: all 350ms;
+    :hover {
+      transform: scale(1.05);
+    }
   }
 `;
 const NameLikeDiv = styled.div`
