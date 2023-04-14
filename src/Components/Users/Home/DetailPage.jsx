@@ -1,10 +1,54 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { AiFillEye, AiFillHeart } from "react-icons/ai";
 import { FaComment } from "react-icons/fa";
 import { BsDot } from "react-icons/bs";
 import styled from "styled-components";
+import axios from "axios";
+import { useParams } from "react-router-dom";
+import moment from "moment";
 
 const DetailPage = () => {
+  const [detailedProject, setDetailedProject] = useState({});
+  const [projectComments, setProjectComments] = useState([]);
+  console.log("Top View", projectComments);
+  const { id } = useParams();
+  console.log(id);
+
+  const getProjectDetail = async () => {
+    try {
+      // const mainURI = "https://devbucket.onrender.com";
+      const localURI = "http://localhost:2001";
+      const URI = `${localURI}/api/project/detail/${id}`;
+      await axios.get(URI).then((res) => {
+        console.log(res.data.data);
+        setDetailedProject(res.data.data);
+      });
+    } catch (error) {
+      console.log("An Error Occoured", error);
+    }
+  };
+
+  const getUsersComments = async () => {
+    try {
+      // const mainURI = "https://devbucket.onrender.com";
+      const localURI = "http://localhost:2001";
+      const URI = `${localURI}/api/comments/${id}/projectComments`;
+
+      await axios.get(URI).then((res) => {
+        setProjectComments(res);
+        console.log("Console View", res.data.data.comments);
+        console.log("State View", projectComments);
+      });
+    } catch (error) {
+      console.log("An Error Occoured", error);
+    }
+  };
+
+  useEffect(() => {
+    getProjectDetail();
+    getUsersComments();
+  }, []);
+
   return (
     <Container>
       <Wrapper>
@@ -13,45 +57,19 @@ const DetailPage = () => {
             <img src="/image/ava.png" alt="" />
           </UserAvatar>
           <UserProjDetails>
-            <ProjectName>Behance Saas Redesign | Darkmode</ProjectName>
+            <ProjectName> {detailedProject?.projectTitle} </ProjectName>
             <UserName>Olorunda Samuel | follow</UserName>
           </UserProjDetails>
         </TopBox>
 
         <ButtomBox>
           <ImageBox>
-            <img src="/image/test.png" alt="" />
+            <img src={detailedProject?.projectImage} alt="" />
           </ImageBox>
           <DescriptionBox>
             <DiscriptionBoxHold>
-              <ProjectTitle>The Best Design Ever</ProjectTitle>
-              <ProjectContent>
-                Lorem ipsum dolor sit amet consectetur adipisicing elit. Maxime
-                mollitia, molestiae quas vel sint commodi repudiandae
-                consequuntur voluptatum laborum numquam blanditiis harum
-                quisquam eius sed odit fugiat iusto fuga praesentium optio,
-                eaque rerum! Provident similique accusantium nemo autem.
-                Veritatis obcaecati tenetur iure eius earum ut molestias
-                architecto voluptate aliquam nihil, eveniet aliquid culpa
-                officia aut! Impedit sit sunt quaerat, odit, tenetur error,
-                harum nesciunt ipsum debitis quas aliquid. Reprehenderit, quia.
-                Quo neque error repudiandae fuga? Ipsa laudantium molestias eos
-                sapiente officiis modi at sunt excepturi expedita sint? Sed
-                quibusdam recusandae alias error harum maxime adipisci amet
-                laborum. Perspiciatis minima nesciunt dolorem! Officiis iure
-                rerum voluptates a cumque velit quibusdam sed amet tempora. Sit
-                laborum ab, eius fugit doloribus tenetur fugiat, temporibus enim
-                commodi iusto libero magni deleniti quod quam consequuntur!
-                Commodi minima excepturi repudiandae velit hic maxime
-                doloremque. Quaerat provident commodi consectetur veniam
-                similique ad earum omnis ipsum saepe, voluptas, hic voluptates
-                pariatur est explicabo fugiat, dolorum eligendi quam cupiditate
-                excepturi mollitia maiores labore suscipit quas? Nulla, placeat.
-                Voluptatem quaerat non architecto ab laudantium modi minima sunt
-                esse temporibus sint culpa, recusandae aliquam numquam totam
-                ratione voluptas quod exercitationem fuga. Possimus quis earum
-                veniam quasi aliquam eligendi, placeat qui corporis!
-              </ProjectContent>
+              <ProjectTitle> {detailedProject.projectName} </ProjectTitle>
+              <ProjectContent>{detailedProject.projectDetails}</ProjectContent>
             </DiscriptionBoxHold>
           </DescriptionBox>
           <LovePublishHold>
@@ -59,32 +77,43 @@ const DetailPage = () => {
               <AiFillHeart />
             </LoveIcon>
             <ProjectTitleButtom>
-              Behance Saas Redesign | Darkmode
+              {detailedProject?.projectTitle}
             </ProjectTitleButtom>
             <LikesCommentHold>
               <IconNumHold>
                 <Icons>
                   <AiFillHeart />
                 </Icons>
-                <IconsNum>20</IconsNum>
+                <IconsNum>
+                  {" "}
+                  {/* {Math.floor(detailedProject?.likes.length)}{" "} */}
+                </IconsNum>
               </IconNumHold>
               <IconNumHold>
                 <Icons>
                   <AiFillEye />
                 </Icons>
-                <IconsNum>413</IconsNum>
+                <IconsNum> 12 </IconsNum>
               </IconNumHold>
               <IconNumHold>
                 <Icons>
                   <FaComment />
                 </Icons>
-                <IconsNum>12</IconsNum>
+                <IconsNum>
+                  {" "}
+                  {/* {Math.floor(detailedProject?.comments.length)}{" "} */}
+                </IconsNum>
               </IconNumHold>
             </LikesCommentHold>
 
-            <PublishDiv>Published: June 15 2020</PublishDiv>
+            <PublishDiv>
+              Published:{" "}
+              {moment(detailedProject.createdAt).format(
+                "MMMM Do YYYY, h:mm:ss a"
+              )}
+            </PublishDiv>
           </LovePublishHold>
-          <CommentsDiv>
+          {/* <CommentsDiv>
             <CommentDivHold>
               <PostComments>
                 <UserAva>
@@ -99,51 +128,49 @@ const DetailPage = () => {
               </PostComments>
               <hr />
               <AllComments>
-                <UserComment>
-                  <UserCommAva>
-                    <img src="/image/ava.png" alt="" />
-                  </UserCommAva>
-                  <UserCommDetails>
-                    <UserNameDate>
-                      {" "}
-                      <span>Olorunda Samuel</span> <BsDot />{" "}
-                      <small>2 minutes ago</small>{" "}
-                    </UserNameDate>
-                    <UserMainComment>
-                      No highly saturated colors. Brilliant color balance!
-                    </UserMainComment>
-                  </UserCommDetails>
-                </UserComment>
-                <UserComment>
-                  <UserCommAva>
-                    <img src="/image/grr.jpg" alt="" />
-                  </UserCommAva>
-                  <UserCommDetails>
-                    <UserNameDate>
-                      {" "}
-                      <span>Lawal Ayomide</span> <BsDot />{" "}
-                      <small>17 minutes ago</small>{" "}
-                    </UserNameDate>
-                    <UserMainComment>
-                      Detailed yet simple, great concept and project!
-                    </UserMainComment>
-                  </UserCommDetails>
-                </UserComment>
+                {projectComments?.map((props) => {
+                  return (
+                    <UserComment>
+                      <UserCommAva>
+                        <img
+                          src={
+                            props.userCommentAvatar !== ""
+                              ? props.userCommentAvatar
+                              : "/image/ava.png"
+                          }
+                          alt=""
+                        />
+                      </UserCommAva>
+                      <UserCommDetails>
+                        <UserNameDate>
+                          {" "}
+                          <span> {props.userCommentName} </span> <BsDot />{" "}
+                          <small> {moment(props.createdAt).fromNow()} </small>{" "}
+                        </UserNameDate>
+                        <UserMainComment>{props.userComment}</UserMainComment>
+                      </UserCommDetails>
+                    </UserComment>
+                  );
+                })}
               </AllComments>
             </CommentDivHold>
-          </CommentsDiv>
+          </CommentsDiv> */}
           <GitHubLiveCard>
             <GitLiveCardHold>
               <GitCardHold>
                 <TopCard>CheckOut My Codes</TopCard>
                 <CardButton>
-                  <button>View On GitHub</button>
+                  <a href={detailedProject.gitHubURI}>
+                    <button>View On GitHub</button>
+                  </a>
                 </CardButton>
               </GitCardHold>
               <GitCardHold>
                 <TopCard>View Live Project</TopCard>
                 <CardButton>
-                  <button>Go To Site</button>
+                  <a href={detailedProject.liveURI}>
+                    <button>Go To Site</button>
+                  </a>
                 </CardButton>
               </GitCardHold>
             </GitLiveCardHold>
