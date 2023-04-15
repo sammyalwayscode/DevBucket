@@ -7,7 +7,7 @@ const Share = () => {
       <Wrapper>
         <UploadsHold>
           <UploadImageDiv>
-            <img src="/image/imagee.png" alt="" />
+            <img src="/image/test.png" alt="" />
           </UploadImageDiv>
           <OtherInputDiv>
             <Title>Share One Of your Best Work</Title>
@@ -102,7 +102,9 @@ const UploadImageDiv = styled.div`
   cursor: pointer;
 
   img {
-    width: 100px;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
   }
 
   @media (max-width: 800px) {
