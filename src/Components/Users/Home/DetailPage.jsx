@@ -46,7 +46,7 @@ const DetailPage = () => {
 
   useEffect(() => {
     getProjectDetail();
-    getUsersComments();
+    return () => getUsersComments();
   }, []);
 
   return (
