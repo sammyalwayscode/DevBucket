@@ -9,6 +9,8 @@ import axios from "axios";
 import Swal from "sweetalert2";
 import LoadingState from "../../../Global/loadingState/loading";
 import toast from "react-hot-toast";
+import { useMutation } from "@tanstack/react-query";
+import { signUp } from "../../../Api/ApiCalls";
 
 const SignUp = () => {
   const navigate = useNavigate();
@@ -25,6 +27,15 @@ const SignUp = () => {
     // formState: { errors },
   } = useForm({
     resolver: yupResolver(formSchema),
+  });
+
+  const signUpFn = useMutation({
+    mutationKey: ["SignUpUser"],
+    mutationFn: signUp,
+    //If User account is created...
+    onSuccess: (data) => {
+      console.log("Data Send Sucessfull", data);
+    },
   });
 
   const onSummit = handleSubmit(async (value) => {
