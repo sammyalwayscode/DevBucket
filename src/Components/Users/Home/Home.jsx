@@ -4,8 +4,18 @@ import { AiFillHeart } from "react-icons/ai";
 import { FaComment } from "react-icons/fa";
 import styled from "styled-components";
 import { NavLink } from "react-router-dom";
+import { useQuery } from "@tanstack/react-query";
+import { getAllProjects } from "../../Api/ApiCalls";
 
 const Home = () => {
+  const getUsersProjects = useQuery({
+    queryFn: getAllProjects,
+    queryKey: ["AllPostedProject"],
+  });
+
+  const projectGoten = getUsersProjects?.data?.data;
+  console.log(projectGoten);
+
   const [getProjects, setGetProjects] = useState([]);
 
   const getProjectsData = async () => {
@@ -30,7 +40,7 @@ const Home = () => {
   return (
     <Container>
       <Wrapper>
-        {getProjects?.map((props) => {
+        {projectGoten?.map((props) => {
           return (
             <DisplayCards key={props._id}>
               <NavLink to={`/detail/${props._id}`}>
