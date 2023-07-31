@@ -41,6 +41,7 @@ const SignIn = () => {
       .then((res) => {
         dispatch(loginUser(res.data.data));
         console.log(res.data.data);
+
         swal({
           title: `Signed In Sucessfully ✌️`,
           text: "You Can Now Start Creating Awesome Projects",
@@ -93,7 +94,7 @@ const SignIn = () => {
                   textDecoration: "none",
                 }}
               >
-                <span>Sign In</span>
+                <span>Sign Up</span>
               </NavLink>
             </HasAcc>
           </SignInputHold>

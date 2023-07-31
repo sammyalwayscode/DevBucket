@@ -29,14 +29,38 @@ const SignUp = () => {
     resolver: yupResolver(formSchema),
   });
 
-  const signUpFn = useMutation({
-    mutationKey: ["SignUpUser"],
-    mutationFn: signUp,
-    //If User account is created...
-    onSuccess: (data) => {
-      console.log("Data Send Sucessfull", data);
-    },
-  });
+  // const signUpFn = useMutation({
+  //   mutationKey: ["SignUpUser"],
+  //   mutationFn: signUp,
+  //   //If User account is created...
+  //   onSuccess: (data) => {
+  //     console.log("Data Send Sucessfull", data);
+  //     Swal.fire({
+  //       icon: "success",
+  //       title: "Your work has been saved",
+  //       showConfirmButton: false,
+  //       timer: 1500,
+  //     }).then(navigate("/signin"));
+  //     setLoading(false);
+  //   },
+  //   //If User Account is Not Created
+  //   onError: (error) => {
+  //     Swal.fire({
+  //       // position: "top-end",
+  //       icon: "error",
+  //       title: error.response.data.message,
+  //       showConfirmButton: false,
+  //       timer: 1500,
+  //     });
+  //     setLoading(false);
+  //     console.log("Err", error);
+  //   },
+  // });
+
+  // const signUpUser = handleSubmit(async (data) => {
+  //   signUpFn.mutate(data);
+  //   console.log("This is The Data", data);
+  // });
 
   const onSummit = handleSubmit(async (value) => {
     console.log(value);
