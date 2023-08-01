@@ -18,11 +18,18 @@ export const getAllProjects = async () => {
 
 export const getProjectDetails = async (id) => {
   return await axios
-    .get(`${URL}/project/detail/${id}`)
+    .get(`${mainURI}/project/detail/${id}`)
     .then((res) => res.data)
     .catch((err) => err);
 };
 
 export const getUserComments = async () => {
   return await axios.get();
+};
+
+export const getProjectComments = async (id) => {
+  return await axios
+    .get(`${mainURI}/comments/${id}/projectComments`)
+    .then((res) => res.data)
+    .catch((err) => err);
 };

@@ -2,10 +2,24 @@ import styled from "styled-components";
 import React, { useState } from "react";
 import moment from "moment";
 import { BsDot } from "react-icons/bs";
+import { useQuery } from "@tanstack/react-query";
+import { useParams } from "react-router-dom";
+import { getProjectComments } from "../../../Api/ApiCalls";
 
 const Comments = () => {
-  const [projectComments, setProjectComments] = useState([]);
-  console.log("Top View", projectComments);
+  const { id } = useParams();
+  console.log(id);
+
+  const gettingComments = useQuery({
+    queryFn: () => getProjectComments(id),
+    queryKey: ["projectComments"],
+  });
+
+  const allComments = gettingComments?.data?.data?.comments;
+  console.log(allComments);
+
+  //   const [projectComments, setProjectComments] = useState([]);
+  //   console.log("Top View", projectComments);
 
   //   const getUsersComments = async () => {
   //     try {
@@ -74,6 +88,9 @@ const Comments = () => {
       </CommentsDiv> */}
 
       <h2>Comments</h2>
+      {allComments?.map((props) => {
+        return <h4> {props?.userCommentName} </h4>;
+      })}
     </Container>
   );
 };

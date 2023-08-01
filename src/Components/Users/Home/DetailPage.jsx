@@ -14,16 +14,16 @@ const DetailPage = () => {
   console.log(id);
 
   const projectDetail = useQuery({
-    queryFn: getProjectDetails(id),
+    queryFn: () => getProjectDetails(id),
     queryKey: ["projectDetail"],
   });
 
-  const projectInfo = projectDetail?.data;
+  const projectInfo = projectDetail?.data?.data;
   console.log("Form React Query", projectInfo);
 
   const [detailedProject, setDetailedProject] = useState({});
 
-  console.log(detailedProject);
+  // console.log(detailedProject);
 
   const getProjectDetail = async () => {
     try {
@@ -31,7 +31,7 @@ const DetailPage = () => {
       const localURI = "http://localhost:2001";
       const URI = `${localURI}/api/project/detail/${id}`;
       await axios.get(URI).then((res) => {
-        console.log("From The Console", res.data.data);
+        // console.log("From The Console", res.data.data);
         setDetailedProject(res.data.data);
       });
     } catch (error) {
