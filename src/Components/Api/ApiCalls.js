@@ -33,3 +33,10 @@ export const getProjectComments = async (id) => {
     .then((res) => res.data)
     .catch((err) => err);
 };
+
+export const postComments = async (userID, projectID) => {
+  return await axios
+    .post(`${mainURI}/${userID}/${projectID}/comments`)
+    .then((res) => res.data)
+    .catch((err) => err);
+};
