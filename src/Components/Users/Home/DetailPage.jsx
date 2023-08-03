@@ -21,27 +21,27 @@ const DetailPage = () => {
   const projectInfo = projectDetail?.data?.data;
   console.log("Form React Query", projectInfo);
 
-  const [detailedProject, setDetailedProject] = useState({});
+  // const [detailedProject, setDetailedProject] = useState({});
 
   // console.log(detailedProject);
 
-  const getProjectDetail = async () => {
-    try {
-      // const mainURI = "https://devbucket.onrender.com";
-      const localURI = "http://localhost:2001";
-      const URI = `${localURI}/api/project/detail/${id}`;
-      await axios.get(URI).then((res) => {
-        // console.log("From The Console", res.data.data);
-        setDetailedProject(res.data.data);
-      });
-    } catch (error) {
-      console.log("An Error Occoured", error);
-    }
-  };
+  // const getProjectDetail = async () => {
+  //   try {
+  //     // const mainURI = "https://devbucket.onrender.com";
+  //     const localURI = "http://localhost:2001";
+  //     const URI = `${localURI}/api/project/detail/${id}`;
+  //     await axios.get(URI).then((res) => {
+  //       // console.log("From The Console", res.data.data);
+  //       setDetailedProject(res.data.data);
+  //     });
+  //   } catch (error) {
+  //     console.log("An Error Occoured", error);
+  //   }
+  // };
 
-  useEffect(() => {
-    getProjectDetail();
-  }, []);
+  // useEffect(() => {
+  //   getProjectDetail();
+  // }, []);
 
   return (
     <Container>
@@ -51,37 +51,32 @@ const DetailPage = () => {
             <img src="/image/ava.png" alt="" />
           </UserAvatar>
           <UserProjDetails>
-            <ProjectName> {detailedProject?.projectTitle} </ProjectName>
+            <ProjectName> {projectInfo?.projectTitle} </ProjectName>
             <UserName>Olorunda Samuel | follow</UserName>
           </UserProjDetails>
         </TopBox>
 
         <ButtomBox>
           <ImageBox>
-            <img src={detailedProject?.projectImage} alt="" />
+            <img src={projectInfo?.projectImage} alt="" />
           </ImageBox>
           <DescriptionBox>
             <DiscriptionBoxHold>
-              <ProjectTitle> {detailedProject.projectName} </ProjectTitle>
-              <ProjectContent>{detailedProject.projectDetails}</ProjectContent>
+              <ProjectTitle> {projectInfo?.projectName} </ProjectTitle>
+              <ProjectContent>{projectInfo?.projectDetails}</ProjectContent>
             </DiscriptionBoxHold>
           </DescriptionBox>
           <LovePublishHold>
             <LoveIcon>
               <AiFillHeart />
             </LoveIcon>
-            <ProjectTitleButtom>
-              {detailedProject?.projectTitle}
-            </ProjectTitleButtom>
+            <ProjectTitleButtom>{projectInfo?.projectTitle}</ProjectTitleButtom>
             <LikesCommentHold>
               <IconNumHold>
                 <Icons>
                   <AiFillHeart />
                 </Icons>
-                <IconsNum>
-                  {" "}
-                  {/* {Math.floor(detailedProject?.likes.length)}{" "} */}
-                </IconsNum>
+                <IconsNum>{Math.floor(projectInfo?.likes.length)}</IconsNum>
               </IconNumHold>
               <IconNumHold>
                 <Icons>
@@ -95,16 +90,14 @@ const DetailPage = () => {
                 </Icons>
                 <IconsNum>
                   {" "}
-                  {/* {Math.floor(detailedProject?.comments.length)}{" "} */}
+                  {Math.floor(projectInfo?.comments.length)}{" "}
                 </IconsNum>
               </IconNumHold>
             </LikesCommentHold>
 
             <PublishDiv>
               Published:{" "}
-              {moment(detailedProject.createdAt).format(
-                "MMMM Do YYYY, h:mm:ss a"
-              )}
+              {moment(projectInfo?.createdAt).format("MMMM Do YYYY, h:mm:ss a")}
             </PublishDiv>
           </LovePublishHold>
           {/* Comment comes in here */}
@@ -113,19 +106,29 @@ const DetailPage = () => {
             <GitLiveCardHold>
               <GitCardHold>
                 <TopCard>CheckOut My Codes</TopCard>
-                <CardButton>
-                  <a href={detailedProject.gitHubURI}>
+                <a
+                  href={projectInfo?.gitHubURI}
+                  style={{
+                    textDecoration: "none",
+                  }}
+                >
+                  <CardButton>
                     <button>View On GitHub</button>
-                  </a>
-                </CardButton>
+                  </CardButton>
+                </a>
               </GitCardHold>
               <GitCardHold>
                 <TopCard>View Live Project</TopCard>
-                <CardButton>
-                  <a href={detailedProject.liveURI}>
+                <a
+                  href={projectInfo?.liveURI}
+                  style={{
+                    textDecoration: "none",
+                  }}
+                >
+                  <CardButton>
                     <button>Go To Site</button>
-                  </a>
-                </CardButton>
+                  </CardButton>{" "}
+                </a>
               </GitCardHold>
             </GitLiveCardHold>
           </GitHubLiveCard>

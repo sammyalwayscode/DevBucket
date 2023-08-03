@@ -10,6 +10,7 @@ const Comments = () => {
   const { id } = useParams();
   console.log(id);
 
+  //Getting All Comments
   const gettingComments = useQuery({
     queryFn: () => getProjectComments(id),
     queryKey: ["projectComments"],
@@ -44,60 +45,71 @@ const Comments = () => {
 
   return (
     <Container>
-      {/* <CommentsDiv>
-        <CommentDivHold>
-          <PostComments>
-            <UserAva>
-              <img src="/image/ava.png" alt="" />
-            </UserAva>
-            <TextAreaBtn>
-              <textarea placeholder="What are your thoughts on this project?" />
-              <AreaBtn>
-                <button>Post a Comment</button>
-              </AreaBtn>
-            </TextAreaBtn>
-          </PostComments>
-          <hr />
-          <AllComments>
-            {projectComments?.map((props) => {
-              return (
-                <UserComment>
-                  <UserCommAva>
-                    <img
-                      src={
-                        props.userCommentAvatar !== ""
-                          ? props.userCommentAvatar
-                          : "/image/ava.png"
-                      }
-                      alt=""
-                    />
-                  </UserCommAva>
-                  <UserCommDetails>
-                    <UserNameDate>
-                      {" "}
-                      <span> {props.userCommentName} </span> <BsDot />{" "}
-                      <small> {moment(props.createdAt).fromNow()} </small>{" "}
-                    </UserNameDate>
-                    <UserMainComment>{props.userComment}</UserMainComment>
-                  </UserCommDetails>
-                </UserComment>
-              );
-            })}
-          </AllComments>
-        </CommentDivHold>
-      </CommentsDiv> */}
+      <Wrapper>
+        <CommentsDiv>
+          <CommentDivHold>
+            <PostComments>
+              <UserAva>
+                <img src="/image/ava.png" alt="" />
+              </UserAva>
+              <TextAreaBtn>
+                <textarea placeholder="What are your thoughts on this project?" />
+                <AreaBtn>
+                  <button>Post a Comment</button>
+                </AreaBtn>
+              </TextAreaBtn>
+            </PostComments>
+            <hr />
+            <AllComments>
+              {allComments?.map((props) => {
+                return (
+                  <UserComment key={props?._id}>
+                    <UserCommAva>
+                      <img
+                        src={
+                          props.userCommentAvatar !== ""
+                            ? props.userCommentAvatar
+                            : "/image/ava.png"
+                        }
+                        alt=""
+                      />
+                    </UserCommAva>
+                    <UserCommDetails>
+                      <UserNameDate>
+                        {" "}
+                        <span> {props.userCommentName} </span> <BsDot />{" "}
+                        <small> {moment(props.createdAt).fromNow()} </small>{" "}
+                      </UserNameDate>
+                      <UserMainComment>{props.userComment}</UserMainComment>
+                    </UserCommDetails>
+                  </UserComment>
+                );
+              })}
+            </AllComments>
+          </CommentDivHold>
+        </CommentsDiv>
 
-      <h2>Comments</h2>
+        {/* <h2>Comments</h2>
       {allComments?.map((props) => {
         return <h4> {props?.userCommentName} </h4>;
-      })}
+      })} */}
+      </Wrapper>
     </Container>
   );
 };
 
 export default Comments;
 
-const Container = styled.div``;
+const Container = styled.div`
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: ${(props) => props.theme.userDetailPageBackgroundColor};
+`;
+const Wrapper = styled.div`
+  width: 85%;
+`;
 
 const CommentsDiv = styled.div`
   width: 100%;
