@@ -2,13 +2,18 @@ import styled from "styled-components";
 import React, { useState } from "react";
 import moment from "moment";
 import { BsDot } from "react-icons/bs";
-import { useQuery } from "@tanstack/react-query";
+import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
 import { useParams } from "react-router-dom";
-import { getProjectComments } from "../../../Api/ApiCalls";
+import { getProjectComments, postComments } from "../../../Api/ApiCalls";
+import * as yup from "yup";
+import { useForm } from "react-hook-form";
+import { yupResolver } from "@hookform/resolvers/yup";
+import { useSelector } from "react-redux";
 
 const Comments = () => {
   const { id } = useParams();
   console.log(id);
+  const projectID = id;
 
   //Getting All Comments
   const gettingComments = useQuery({
@@ -18,6 +23,43 @@ const Comments = () => {
 
   const allComments = gettingComments?.data?.data?.comments;
   console.log(allComments);
+
+  //Post New Comment
+
+  const user = useSelector((state) => state.myReducer.currentUser);
+  const userID = user._id;
+  const client = useQueryClient();
+  const commentSchema = yup.object({
+    userComment: yup.string().required("Please Enter Your Comment"),
+  });
+
+  const {
+    register,
+    handleSubmit,
+    formState: { errors },
+    reset,
+  } = useForm({
+    resolver: yupResolver(commentSchema),
+  });
+
+  const newCommentFN = useMutation({
+    // mutationFn: postComments(userID, projectID),
+    mutationKey: ["postComment"],
+
+    onSuccess: (data) => {
+      // client.invalidateQueries({ queryKey: ["newComment"] });
+      console.log("Invalidate On Success Data Sent Sucessfill", data);
+    },
+    onError: (error) => {
+      console.log(error);
+    },
+  });
+
+  const postUserComment = handleSubmit(async (data) => {
+    newCommentFN.mutate(data);
+    console.log("HandleSubmmit Data Submitted", data);
+    reset();
+  });
 
   //   const [projectComments, setProjectComments] = useState([]);
   //   console.log("Top View", projectComments);
@@ -48,14 +90,17 @@ const Comments = () => {
       <Wrapper>
         <CommentsDiv>
           <CommentDivHold>
-            <PostComments>
+            <PostComments onSubmit={postUserComment}>
               <UserAva>
                 <img src="/image/ava.png" alt="" />
               </UserAva>
               <TextAreaBtn>
-                <textarea placeholder="What are your thoughts on this project?" />
+                <textarea
+                  placeholder="What are your thoughts on this project?"
+                  {...register("userComment")}
+                />
                 <AreaBtn>
-                  <button>Post a Comment</button>
+                  <button type="submit">Post a Comment</button>
                 </AreaBtn>
               </TextAreaBtn>
             </PostComments>
@@ -137,7 +182,7 @@ const CommentDivHold = styled.div`
     height: 1px;
   }
 `;
-const PostComments = styled.div`
+const PostComments = styled.form`
   width: 95%;
   /* background-color: aliceblue; */
   margin-top: 20px;
