@@ -9,8 +9,8 @@ import axios from "axios";
 import Swal from "sweetalert2";
 import LoadingState from "../../../Global/loadingState/loading";
 import toast from "react-hot-toast";
-import { useMutation } from "@tanstack/react-query";
-import { signUp } from "../../../Api/ApiCalls";
+// import { useMutation } from "@tanstack/react-query";
+// import { signUp } from "../../../Api/ApiCalls";
 
 const SignUp = () => {
   const navigate = useNavigate();
